@@ -12,11 +12,11 @@ function App() {
                 {/* A <Switch> looks through its children <Route>s and
           renders the first one that matches the current URL. */}
                 <Routes>
-                    <Route exact path="/" component={LandingPage()} />
+                    <Route exact path="/" element={LandingPage()} />
 
-                    <Route exact path="/login" component={LoginPage()} />
+                    <Route exact path="/login" element={LoginPage()} />
 
-                    <Route exact path="/register" component={RegisterPage()} />
+                    <Route exact path="/register" element={RegisterPage()} />
                 </Routes>
             </div>
         </BrowserRouter>
