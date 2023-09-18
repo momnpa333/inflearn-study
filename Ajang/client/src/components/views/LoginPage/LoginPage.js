@@ -1,6 +1,13 @@
 import React, { useState } from "react";
+//import Axios from "axios";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../../_actions/user_action";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
 
@@ -14,15 +21,19 @@ function LoginPage() {
 
     const onSubmitHandler = (event) => {
         event.preventDefault();
-        console.log("Email", Email);
-        console.log("Password", Password);
 
         let body = {
             email: Email,
-            passwords: Password,
+            password: Password,
         };
 
-        Axios.post("api/user/login", body).then(response);
+        dispatch(loginUser(body)).then((response) => {
+            if (response.payload.loginSuccess) {
+                navigate("/");
+            } else {
+                alert("Error");
+            }
+        });
     };
 
     return (
@@ -48,7 +59,7 @@ function LoginPage() {
                     onChange={onPasswordHandler}
                 />
                 <br />
-                <button>Login</button>
+                <button type="submit">Login</button>
             </form>
         </div>
     );
