@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
+import Auth from "../../../hoc/auth";
 
 function LandingPage() {
     useEffect(() => {
@@ -34,4 +35,4 @@ function LandingPage() {
     );
 }
 
-export default LandingPage;
+export default Auth(LandingPage, null);
