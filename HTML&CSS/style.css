@@ -1,3 +1,11 @@
+* {
+    color: blue;
+}
+
 h1 {
     color: red;
+    font-size: 20px;
+}
+#green {
+    color: green;
 }
