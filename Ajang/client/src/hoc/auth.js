@@ -12,7 +12,6 @@ const Auth = (SpecificComponent, option, adminRoute = null) => {
 
         useEffect(() => {
             dispatch(auth()).then((res) => {
-                console.log(res);
                 if (!res.payload.isAuth) {
                     if (option) {
                         navigate("/login");

@@ -41,7 +41,6 @@ function RegisterPage() {
         };
 
         dispatch(registerUser(body)).then((response) => {
-            console.log(response.payload);
             if (response.payload.success) {
                 navigate("/login");
             } else {
