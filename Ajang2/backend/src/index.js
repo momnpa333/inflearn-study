@@ -16,16 +16,25 @@ mongoose
     .then(() => console.log("MongoDB Connected..."))
     .catch((err) => console.log(err));
 
-app.get("/", (req, res) => {
-    res.send("Hello World111");
+app.get("/", (req, res, next) => {
+    setImmediate(() => {
+        next(new Error("BROKEN"));
+    });
+    //throw new Error("it is an error");
 });
 
 app.post("/", (req, res) => {
     console.log(req.body);
-    res.send(req.body);
+    res.json(req.body);
 });
 
-console.log(path.join(__dirname, "../uploads"));
+//app.use("/users", require("./routes/users"));
+
+app.use((error, req, res, next) => {
+    res.status(error.status || 500);
+    res.send(error.message || "Internal Server00 Error");
+});
+
 app.use(express.static(path.join(__dirname, "../uploads")));
 
 // app.listen(PORT, HOST);
