@@ -1,5 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../../store/thunkFunctions";
 
 const RegisterPage = () => {
     const {
@@ -8,8 +10,16 @@ const RegisterPage = () => {
         formState: { errors },
         reset,
     } = useForm({ mode: "onChange" });
+    const dispatch = useDispatch();
 
     const onSubmit = ({ email, password, name }) => {
+        const body = {
+            email,
+            password,
+            name,
+            image: `https://via.placeholder.com/600x400?text=no+user+image`,
+        };
+        dispatch(registerUser(body));
         reset();
     };
 
@@ -94,20 +104,6 @@ const RegisterPage = () => {
                                 </span>
                             </div>
                         )}
-                    </div>
-
-                    <div className="mb-2">
-                        <label
-                            htmlFor="password"
-                            className="text-sm font-semibold text-gray-800"
-                        >
-                            Password 확인
-                        </label>
-                        <input
-                            type="password"
-                            id="password"
-                            className="w-full px-4 py-2 mt-2 bg-white border rounded-md"
-                        />
                     </div>
 
                     <div className="mt-6">
