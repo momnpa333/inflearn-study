@@ -19,10 +19,6 @@ mongoose
 app.use(cors());
 app.use(express.json());
 
-app.use("/", (req, res, next) => {
-    console.log("Hi from client3");
-});
-
 app.get("/", (req, res, next) => {
     setImmediate(() => {
         next(new Error("BROKEN"));
@@ -35,7 +31,7 @@ app.post("/", (req, res) => {
     res.json(req.body);
 });
 
-//app.use("/users", require("./routes/users"));
+app.use("/users", require("./routes/users"));
 
 app.use((error, req, res, next) => {
     res.status(error.status || 500);
