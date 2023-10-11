@@ -7,6 +7,8 @@ const config = require("./config/key");
 const { auth } = require("./middleware/auth");
 const { User } = require("./models/User");
 
+const cors = require("cors");
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true })); //application/x-www-form-urlencoded
 
 app.use(bodyParser.json()); //application/json
@@ -31,11 +33,10 @@ app.get("/api/hello", (req, res) => {
     res.send("Hello");
 });
 
-app.post("/api/users/register", (req, res) => {
+app.post("/users/register", (req, res) => {
     //회원가입할때 필요한 정보들을 client에서 가져오면
     //그것들을 데이터베이스에 넣어준다.
     const user = new User(req.body);
-    console.log(req.body);
     user.save()
         .then(() => {
             res.status(200).json({ success: true });
