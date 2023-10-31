@@ -11,7 +11,6 @@ const RegisterPage = () => {
         reset,
     } = useForm({ mode: "onChange" });
     const dispatch = useDispatch();
-
     const onSubmit = ({ email, password, name }) => {
         const body = {
             email,
@@ -19,6 +18,7 @@ const RegisterPage = () => {
             name,
             image: `https://via.placeholder.com/600x400?text=no+user+image`,
         };
+
         dispatch(registerUser(body));
         reset();
     };
