@@ -3,7 +3,7 @@ const path = require("path");
 
 const app = express();
 
-const port = 8080;
+const port = 7777;
 const cors = require("cors");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
@@ -32,6 +32,7 @@ app.post("/", (req, res) => {
 });
 
 app.use("/users", require("./routes/users"));
+app.use("/storycards", require("./routes/storycards"));
 
 app.use((error, req, res, next) => {
     res.status(error.status || 500);
