@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
+JWT_SECRET = supersecret;
 let auth = async (req, res, next) => {
     //토큰을 request headers에서 가져외
     const authHeader = req.headers["authorization"];
@@ -11,7 +12,7 @@ let auth = async (req, res, next) => {
 
     try {
         //토큰이 유효한 토큰인지 확인
-        const decode = jwt.verify(token, process.env.JWT_SECRET);
+        const decode = jwt.verify(token, JWT_SECRET);
         const user = await User.findOne({ _id: decode.userId });
         console.log(user);
         if (!user) {

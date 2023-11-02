@@ -6,13 +6,17 @@ const app = express();
 const port = 7777;
 const cors = require("cors");
 const dotenv = require("dotenv");
+MONGO_URI =
+    "mongodb+srv://momnpa333:rnjsekdns1@cluster0.e7o5nxx.mongodb.net/?retryWrites=true&w=majority";
+
+JWT_SECRET = "supersecret";
 const mongoose = require("mongoose");
 dotenv.config();
 
 //const HOST = "0.0.0.0";
 
 mongoose
-    .connect(process.env.MONGO_URI)
+    .connect(MONGO_URI)
     .then(() => console.log("MongoDB Connected..."))
     .catch((err) => console.log(err));
 
