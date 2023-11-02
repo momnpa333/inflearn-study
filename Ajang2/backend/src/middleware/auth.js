@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
-JWT_SECRET = supersecret;
+const JWT_SECRET = supersecret;
 let auth = async (req, res, next) => {
     //토큰을 request headers에서 가져외
     const authHeader = req.headers["authorization"];
