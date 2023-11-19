@@ -3,20 +3,16 @@ const path = require("path");
 
 const app = express();
 
-const port = 7777;
+const port = 8080;
 const cors = require("cors");
 const dotenv = require("dotenv");
-MONGO_URI =
-    "mongodb+srv://momnpa333:rnjsekdns1@cluster0.e7o5nxx.mongodb.net/?retryWrites=true&w=majority";
-
-JWT_SECRET = "supersecret";
 const mongoose = require("mongoose");
 dotenv.config();
 
 //const HOST = "0.0.0.0";
 
 mongoose
-    .connect(MONGO_URI)
+    .connect(process.env.MONGO_URI)
     .then(() => console.log("MongoDB Connected..."))
     .catch((err) => console.log(err));
 
@@ -36,7 +32,7 @@ app.post("/", (req, res) => {
 });
 
 app.use("/users", require("./routes/users"));
-app.use("/storycards", require("./routes/storycards"));
+app.use("/products", require("./routes/products"));
 
 app.use((error, req, res, next) => {
     res.status(error.status || 500);
