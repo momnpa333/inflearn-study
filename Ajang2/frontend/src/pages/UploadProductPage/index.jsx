@@ -22,7 +22,7 @@ const UploadProductPage = () => {
         continents: 1,
         images: [],
     });
-
+    console.log(product);
     const userData = useSelector((state) => state.user?.userData);
     const navigate = useNavigate();
 
@@ -54,7 +54,6 @@ const UploadProductPage = () => {
             console.error(err);
         }
     };
-
     return (
         <section>
             <div className="text-center m-7">

@@ -4,6 +4,7 @@ import axiosInstance from "../utils/axios";
 
 // eslint-disable-next-line
 const FileUpload = ({ onImageChange, images }) => {
+    console.log(images);
     const handleDrop = async (files) => {
         let formData = new FormData();
 
@@ -23,6 +24,14 @@ const FileUpload = ({ onImageChange, images }) => {
         }
     };
 
+    const handleDelete = (image) => {
+        // eslint-disable-next-line
+        const currentIndex = images.indexOf(image);
+        let newImages = [...images];
+        newImages.splice(currentIndex, 1);
+        onImageChange(newImages);
+    };
+
     return (
         <div className="flex gap-4">
             <Dropzone onDrop={handleDrop}>
@@ -38,7 +47,7 @@ const FileUpload = ({ onImageChange, images }) => {
             <div className="flex-grow h-[300px] border flex items-center justify-center overflow-x-scroll overflow-y-hidden">
                 {/* eslint-disable-next-line */}
                 {images.map((image) => (
-                    <div key={image}>
+                    <div key={image} onClick={() => handleDelete(image)}>
                         <img
                             className="min-w-[300px] h-[300px] "
                             src={`${import.meta.env.VITE_SERVER_URL}/${image}`}
