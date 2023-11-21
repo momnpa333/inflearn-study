@@ -79,4 +79,29 @@ router.get("/", async (req, res, next) => {
     }
 });
 
+router.get("/:id", async (req, res, next) => {
+    const type = req.query.type;
+    let productIds = req.params.id;
+    // console.log("1" + productIds);
+    //productId 를 이용해서 db에서 productID와 같은 상품의 정보를 가져옵니다.
+    if (type === "array") {
+        //id=213213132,1515161,51516516
+        //productIds=['32132123','132123132','123132']
+        let ids = productIds.split(",");
+        productIds = ids.map((item) => {
+            return item;
+        });
+    }
+
+    try {
+        const product = await Product.find({
+            _id: { $in: productIds },
+        }).populate("writer");
+
+        return res.status(200).send(product);
+    } catch (err) {
+        next(err);
+    }
+});
+
 module.exports = router;

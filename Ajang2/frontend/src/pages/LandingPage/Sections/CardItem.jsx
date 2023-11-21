@@ -8,7 +8,8 @@ const CardItem = ({ product }) => {
         <div className="border-[1px] border-gray-300">
             {/* eslint-disable-next-line */}
             <ImageSlider images={product.images} />
-            <Link to={"/product/${product._id"}>
+            {/* eslint-disable-next-line */}
+            <Link to={`/product/${product._id}`}>
                 {/* eslint-disable-next-line */}
                 <p className="p-1">{product.title}</p>
                 {/* eslint-disable-next-line */}
