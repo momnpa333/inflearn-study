@@ -17,6 +17,7 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 import NotAuthRoutes from "./components/NotAuthRoutes";
 import HistoryPage from "./pages/HistoryPage";
 import CartPage from "./pages/CartPage";
+import TestPage from "./pages/TestPage";
 import DetailProductPage from "./pages/DetailProductPage";
 import UploadProductPage from "./pages/UploadProductPage";
 
@@ -53,6 +54,7 @@ function App() {
         <Routes>
             <Route path="/" element={<Layout />}>
                 <Route index element={<LandingPage />} />
+                <Route path="/test" element={<TestPage />} />
                 {/* 로그인한 사람만 갈 수 있는 경로 */}
                 <Route element={<ProtectedRoutes isAuth={isAuth} />}>
                     <Route path="/protected" element={<ProtectedPage />} />

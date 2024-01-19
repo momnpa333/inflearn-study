@@ -1,8 +1,16 @@
 import axios from "axios";
+// const dotenv = require("dotenv");
+// dotenv.config();
 
 export const axiosInstance = axios.create({
+    baseURL: import.meta.env.PROD ? "" : "http://18.191.138.50:8080",
+    //    baseURL: import.meta.env.PROD ? "" : "http://localhost:8080",
+});
+
+export const testInstance = axios.create({
     baseURL: import.meta.env.PROD ? "" : "http://localhost:8080",
 });
+
 axiosInstance.interceptors.request.use(
     function (config) {
         config.headers.Authorization =

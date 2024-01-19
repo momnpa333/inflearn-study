@@ -101,3 +101,47 @@ export const getCartItems = createAsyncThunk(
         }
     }
 );
+
+export const removeCartItem = createAsyncThunk(
+    "user/removeCartItems",
+    async (productId, thunkAPI) => {
+        try {
+            console.log(productId);
+            const response = await axiosInstance.delete(
+                `/users/cart?productId=${productId}`
+            );
+
+            response.data.cart.forEach((cartItem) => {
+                response.data.productInfo.forEach((productDetail, index) => {
+                    if (cartItem.id === productDetail._id) {
+                        response.data.productInfo[index].quantity =
+                            cartItem.quantity;
+                    }
+                });
+            });
+
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return thunkAPI.rejectWithValue(
+                error.response.data || error.message
+            );
+        }
+    }
+);
+
+export const payProducts = createAsyncThunk(
+    "user/payProducts",
+    async (body, thunkAPI) => {
+        try {
+            const response = axiosInstance.post(`/users/payment`, body);
+
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return thunkAPI.rejectWithValue(
+                error.response.data || error.message
+            );
+        }
+    }
+);
